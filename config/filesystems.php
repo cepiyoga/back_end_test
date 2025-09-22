@@ -38,12 +38,13 @@ return [
             'report' => false,
         ],
 
-        'disks' => [
-            'hostinger' => [
-                'driver' => 'local',
-                'root' => '/var/www/html/images/',
-                'visibility' => 'public',
-            ],
+
+        'hostinger' => [
+            'driver' => 'local',
+            'root' => '/var/www/html/images/',
+            'visibility' => 'public',
+            'throw' => false,
+            'report' => false,
         ],
 
         'public' => [

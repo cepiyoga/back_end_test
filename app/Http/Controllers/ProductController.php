@@ -40,7 +40,18 @@ class ProductController extends Controller
         $data["banner_image"] = "default.jpg";
         $data["user_id"] = auth()->user()->id;
         if ($request->hasFile('banner_image')) {
-            $data["banner_image"] = $request->file('banner_image')->store("products", 'public');
+            //$data["banner_image"] = $request->file('banner_image')->store("products", 'public');
+
+            $upload = $request->file('banner_image');
+            $image = Image::read($upload)->scale(700);
+            $strName = RandomClass::randomYMDS();
+            $filename = $strName.'.'.$upload->getClientOriginalExtension();
+            $data["banner_image"] = $filename;
+            // di Hosting ganti 'public' menjadi 'hostinger'
+            Storage::disk('public')->put(
+                '/gambar/products/'.$filename,
+                $image->encodeByExtension($upload->getClientOriginalExtension(), quality: 50)
+            );
         }
 
         Product::create($data);
@@ -84,8 +95,8 @@ class ProductController extends Controller
             $strName = RandomClass::randomYMDS();
             $filename = $strName.'.'.$upload->getClientOriginalExtension();
             // di Hosting ganti 'public' menjadi 'hostinger'
-            Storage::disk('hostinger')->put(
-                '/images/products/'.$filename,
+            Storage::disk('public')->put(
+                '/gambar/products/'.$filename,
                 $image->encodeByExtension($upload->getClientOriginalExtension(), quality: 50)
             );
 
