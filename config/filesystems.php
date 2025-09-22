@@ -38,6 +38,14 @@ return [
             'report' => false,
         ],
 
+        'disks' => [
+            'hostinger' => [
+                'driver' => 'local',
+                'root' => '/var/www/html/images/',
+                'visibility' => 'public',
+            ],
+        ],
+
         'public' => [
             'driver' => 'local',
             'root' => storage_path('app/public'),
