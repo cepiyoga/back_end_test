@@ -1,0 +1,12 @@
+
+-> tambahkan HasApiTokens pada controller users
+   use HasFactory, Notifiable, HasApiTokens;
+
+-> Create API Sanctum
+   php artisan install:api
+
+-> Create Controller:
+   php artisan make:controller ProductController --resource --api
+
+-> Resource Route:
+   Route::apiResource('products', ProductController::class);
